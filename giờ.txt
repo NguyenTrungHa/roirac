@@ -1,0 +1,41 @@
+% Định nghĩa thông số cho từng thiết bị
+devices = struct('name', {'Máy hút bụi', 'Bình nước nóng', 'Lò nướng bánh mì', ...
+                            'Máy bơm nước', 'Máy nước nóng (Geyser)', ...
+                            'Máy rửa bát', 'Máy giặt', 'Máy sấy quần áo', ...
+                            'Nồi chiên điện', 'Nồi cơm điện', 'Tủ lạnh', ...
+                            'Điều hòa (AC)', 'Đèn chiếu sáng', 'Tivi', 'Lò nướng'}, ...
+                  'power', [0.7, 5, 1.5, 1, 3.5, 1.8, 0.7, 5, ...
+                            1.2, 1, 225, 1.5, 0.25, 0.2, 2.15], ...
+                  'usage_time', [6, 12, 3, 8, 2, 8, 5, 4, ...
+                                 2, 4, 18, 15, 9, 8, 10]);
+
+% Thiết lập thời gian hoạt động cho các thiết bị
+for i = 1:length(devices)
+    devices(i).operating_time = randi([1, 24]); % Thời gian ngẫu nhiên từ 1 đến 24 giờ
+end
+
+% Khởi tạo lịch chạy
+schedule = zeros(length(devices), 1);
+
+% Tính toán lịch chạy cho tất cả các thiết bị
+for i = 1:length(devices)
+    if devices(i).operating_time <= 24
+        schedule(i) = devices(i).operating_time; % Gán thời gian hoạt động cho thiết bị
+    else
+        disp(['Thời gian hoạt động của ', devices(i).name, ' vượt quá giới hạn.']);
+    end
+end
+
+% In lịch trình
+disp('Lịch trình hoạt động cho 15 thiết bị:');
+for i = 1:length(devices)
+    fprintf('%s: %d giờ\n', devices(i).name, schedule(i));
+end
+
+% Mô phỏng dùng các thuật toán
+GA_results = genetic_algorithm(devices);
+AOA_results = arithmetic_optimization_algorithm(devices);
+HAG_results = hybrid_algorithmic_approach(devices);
+
+% So sánh kết quả từ các thuật toán
+compare_results(GA_results, AOA_results, HAG_results);

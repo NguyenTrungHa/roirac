@@ -1,0 +1,28 @@
+% Khởi tạo các thông số
+num_devices = 15;
+power_consumption = ... % Ma trận công suất
+operating_time = ... % Ma trận thời gian hoạt động
+price_profile = ... % Ma trận giá điện
+...
+
+% Khởi tạo quần thể ban đầu
+population = randi([0,1], pop_size, num_devices*time_steps);
+
+% Vòng lặp chính của thuật toán
+for generation = 1:max_generations
+  % Tính toán fitness
+  fitness = calculate_fitness(population, power_consumption, operating_time, price_profile);
+
+  % Chọn bố mẹ
+  parents = selection(population, fitness);
+
+  % Lai ghép và đột biến
+  offspring = crossover(parents);
+  offspring = mutation(offspring);
+
+  % Cập nhật quần thể
+  population = update_population(population, offspring, fitness);
+end
+
+% Lấy lịch trình tốt nhất
+best_schedule = population(1,:);
