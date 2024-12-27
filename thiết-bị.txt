@@ -1,0 +1,29 @@
+% Định nghĩa thông số cho từng thiết bị
+devices = struct('name', {'Máy hút bụi', 'Bình nước nóng', 'Lò nướng bánh mì', ...
+                            'Máy bơm nước', 'Máy nước nóng (Geyser)', ...
+                            'Máy rửa bát', 'Máy giặt', 'Máy sấy quần áo', ...
+                            'Nồi chiên điện', 'Nồi cơm điện', 'Tủ lạnh', ...
+                            'Điều hòa (AC)', 'Đèn chiếu sáng', 'Tivi', 'Lò nướng'}, ...
+                  'power', [0.7, 5, 1.5, 1, 3.5, 1.8, 0.7, 5, ...
+                            1.2, 1, 225, 1.5, 0.25, 0.2, 2.15], ...
+                  'usage_time', [6, 12, 3, 8, 2, 8, 5, 4, ...
+                                 2, 4, 18, 15, 9, 8, 10]);
+
+
+
+% Số lượng thiết bị
+M = length(devices);
+
+% Thời gian hoạt động ngẫu nhiên cho mô phỏng
+for i = 1:M
+    devices(i).operating_time = randi([1, 24]); % Ví dụ, từ 1 đến 24 giờ
+end
+function [best_schedule, best_cost] = genetic_algorithm(devices)
+    % Logic cho Genetic Algorithm 
+    % Trả về lịch trình tốt nhất và chi phí tương ứng
+end
+% Giả định bạn đã lắp đặt lịch trình
+results = run_simulation(devices); % Chạy mô phỏng
+
+% So sánh với các phương pháp khác
+compare_results(GA_results, AOA_results, HAG_results); % So sánh các kết quả
